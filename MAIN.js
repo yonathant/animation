@@ -2,72 +2,11 @@
 
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
-lib.webFontTxtInst = {}; 
-var loadedTypekitCount = 0;
-var loadedGoogleCount = 0;
-var gFontsUpdateCacheList = [];
-var tFontsUpdateCacheList = [];
 lib.ssMetadata = [
 		{name:"MAIN_atlas_", frames: [[0,1859,1206,878],[0,979,1206,878],[0,2739,1206,878],[0,0,1105,977],[1208,1726,500,335],[1208,2063,500,335],[1208,2400,500,335],[1710,1548,224,297],[1710,1847,224,297],[1208,1284,450,440],[1710,2146,250,250],[1710,2398,250,250],[1712,2650,116,236],[1660,1284,372,262],[1208,2737,502,328],[1208,612,738,670],[1107,0,902,610],[2011,0,31,520],[1830,2650,116,236]]}
 ];
 
 
-
-lib.updateListCache = function (cacheList) {		
-	for(var i = 0; i < cacheList.length; i++) {		
-		if(cacheList[i].cacheCanvas)		
-			cacheList[i].updateCache();		
-	}		
-};		
-
-lib.addElementsToCache = function (textInst, cacheList) {		
-	var cur = textInst;		
-	while(cur != null && cur != exportRoot) {		
-		if(cacheList.indexOf(cur) != -1)		
-			break;		
-		cur = cur.parent;		
-	}		
-	if(cur != exportRoot) {		
-		var cur2 = textInst;		
-		var index = cacheList.indexOf(cur);		
-		while(cur2 != null && cur2 != cur) {		
-			cacheList.splice(index, 0, cur2);		
-			cur2 = cur2.parent;		
-			index++;		
-		}		
-	}		
-	else {		
-		cur = textInst;		
-		while(cur != null && cur != exportRoot) {		
-			cacheList.push(cur);		
-			cur = cur.parent;		
-		}		
-	}		
-};		
-
-lib.gfontAvailable = function(family, totalGoogleCount) {		
-	lib.properties.webfonts[family] = true;		
-	var txtInst = lib.webFontTxtInst && lib.webFontTxtInst[family] || [];		
-	for(var f = 0; f < txtInst.length; ++f)		
-		lib.addElementsToCache(txtInst[f], gFontsUpdateCacheList);		
-
-	loadedGoogleCount++;		
-	if(loadedGoogleCount == totalGoogleCount) {		
-		lib.updateListCache(gFontsUpdateCacheList);		
-	}		
-};		
-
-lib.tfontAvailable = function(family, totalTypekitCount) {		
-	lib.properties.webfonts[family] = true;		
-	var txtInst = lib.webFontTxtInst && lib.webFontTxtInst[family] || [];		
-	for(var f = 0; f < txtInst.length; ++f)		
-		lib.addElementsToCache(txtInst[f], tFontsUpdateCacheList);		
-
-	loadedTypekitCount++;		
-	if(loadedTypekitCount == totalTypekitCount) {		
-		lib.updateListCache(tFontsUpdateCacheList);		
-	}		
-};
 // symbols:
 
 
@@ -1132,9 +1071,6 @@ p.nominalBounds = new cjs.Rectangle(-79.7,-71.8,159.3,143.7);
 		
 		createjs.Sound.stop("wife");
 	}
-	this.frame_314 = function() {
-		playSound("BGmusic");
-	}
 	this.frame_436 = function() {
 		playSound("pouring");
 	}
@@ -1142,9 +1078,6 @@ p.nominalBounds = new cjs.Rectangle(-79.7,-71.8,159.3,143.7);
 		createjs.Sound.registerSound("/sounds/pouring.mp3","pouring");
 		
 		createjs.Sound.stop('pouring');
-	}
-	this.frame_464 = function() {
-		playSound("BGmusic");
 	}
 	this.frame_476 = function() {
 		playSound("boiling");
@@ -1157,7 +1090,6 @@ p.nominalBounds = new cjs.Rectangle(-79.7,-71.8,159.3,143.7);
 	}
 	this.frame_506 = function() {
 		playSound("boom");
-		playSound("BGmusic");
 	}
 	this.frame_719 = function() {
 		var self = this; 
@@ -1169,11 +1101,10 @@ p.nominalBounds = new cjs.Rectangle(-79.7,-71.8,159.3,143.7);
 		{
 			self.gotoAndPlay(1);
 		}
-		createjs.Sound.stop();
 	}
 
 	// actions tween:
-	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1).call(this.frame_1).wait(127).call(this.frame_128).wait(56).call(this.frame_184).wait(50).call(this.frame_234).wait(5).call(this.frame_239).wait(21).call(this.frame_260).wait(53).call(this.frame_313).wait(1).call(this.frame_314).wait(122).call(this.frame_436).wait(27).call(this.frame_463).wait(1).call(this.frame_464).wait(12).call(this.frame_476).wait(29).call(this.frame_505).wait(1).call(this.frame_506).wait(213).call(this.frame_719).wait(2));
+	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1).call(this.frame_1).wait(127).call(this.frame_128).wait(56).call(this.frame_184).wait(50).call(this.frame_234).wait(5).call(this.frame_239).wait(21).call(this.frame_260).wait(53).call(this.frame_313).wait(123).call(this.frame_436).wait(27).call(this.frame_463).wait(13).call(this.frame_476).wait(29).call(this.frame_505).wait(1).call(this.frame_506).wait(213).call(this.frame_719).wait(2));
 
 	// actions
 	this.play_button = new lib.play_button_1();
@@ -1523,17 +1454,16 @@ lib.properties = {
 	fps: 24,
 	color: "#FFFFFF",
 	opacity: 1.00,
-	webfonts: {},
 	manifest: [
-		{src:"images/MAIN_atlas_.png", id:"MAIN_atlas_"},
-		{src:"sounds/BGmusic.mp3", id:"BGmusic"},
-		{src:"sounds/boiling.mp3", id:"boiling"},
-		{src:"sounds/boom.mp3", id:"boom"},
-		{src:"sounds/clicking.mp3", id:"clicking"},
-		{src:"sounds/iphonering.mp3", id:"iphonering"},
-		{src:"sounds/iphoneunlock.mp3", id:"iphoneunlock"},
-		{src:"sounds/pouring.mp3", id:"pouring"},
-		{src:"sounds/wife.mp3", id:"wife"}
+		{src:"images/MAIN_atlas_.png?1523554881542", id:"MAIN_atlas_"},
+		{src:"sounds/BGmusic.mp3?1523554882582", id:"BGmusic"},
+		{src:"sounds/boiling.mp3?1523554882582", id:"boiling"},
+		{src:"sounds/boom.mp3?1523554882582", id:"boom"},
+		{src:"sounds/clicking.mp3?1523554882582", id:"clicking"},
+		{src:"sounds/iphonering.mp3?1523554882582", id:"iphonering"},
+		{src:"sounds/iphoneunlock.mp3?1523554882582", id:"iphoneunlock"},
+		{src:"sounds/pouring.mp3?1523554882582", id:"pouring"},
+		{src:"sounds/wife.mp3?1523554882582", id:"wife"}
 	],
 	preloads: []
 };
