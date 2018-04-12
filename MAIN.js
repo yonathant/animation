@@ -1038,7 +1038,7 @@ p.nominalBounds = new cjs.Rectangle(-79.7,-71.8,159.3,143.7);
 		self.stop();
 		
 		self.play_button.addEventListener('click', clickPlayStart);
-		createjs.Sound.registerSound("/sounds/BGmusic.mp3","BGmusic");
+		createjs.Sound.registerSound("/animation/sounds/BGmusic.mp3","BGmusic");
 		
 		function clickPlayStart() {
 			self.gotoAndPlay(1);
@@ -1456,7 +1456,7 @@ lib.properties = {
 	opacity: 1.00,
 	manifest: [
 		{src:"images/MAIN_atlas_.png?1523554881542", id:"MAIN_atlas_"},
-		{src:"sounds/BGmusic.mp3?1523554882582", id:"BGmusic"},
+		{src:"/animation/sounds/BGmusic.mp3?1523554882582", id:"BGmusic"},
 		{src:"sounds/boiling.mp3?1523554882582", id:"boiling"},
 		{src:"sounds/boom.mp3?1523554882582", id:"boom"},
 		{src:"sounds/clicking.mp3?1523554882582", id:"clicking"},
